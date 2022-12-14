@@ -1,8 +1,11 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
-    <event name="customer_save_before">
-        <observer name="change_first_name_save_before"
-                  instance="SmartOSC\CustomerRegistration\Observer\ChangeDisplayText"/>
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <event name="customer_login">
+        <observer name="phpaiss_customlog_customer_login"
+                  instance="SmartOSC\CustomerRegistration\Observer\CustomerLoginSuccess"/>
+    </event>
+    <event name="customer_register_success">
+        <observer name="sendmail_toadmin" instance="SmartOSC\CustomerRegistration\Observer\SendMailToAdmin"/>
     </event>
 </config>
