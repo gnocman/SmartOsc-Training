@@ -5,4 +5,7 @@
         <observer name="phpaiss_customlog_customer_login"
                   instance="SmartOSC\CustomerRegistration\Observer\CustomerLoginSuccess"/>
     </event>
+    <event name="customer_register_success">
+        <observer name="sendmail_toadmin" instance="SmartOSC\CustomerRegistration\Observer\SendMailToAdmin"/>
+    </event>
 </config>
