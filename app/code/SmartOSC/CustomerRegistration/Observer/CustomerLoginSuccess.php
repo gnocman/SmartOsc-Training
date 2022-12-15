@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace SmartOSC\CustomerRegistration\Observer;
 
@@ -6,6 +7,9 @@ use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use SmartOSC\CustomerRegistration\Logger\Customer;
 
+/**
+ * Log customer data (current date and time, customer first name, customer lastname, customer email)
+ */
 class CustomerLoginSuccess implements ObserverInterface
 {
     /**
@@ -24,7 +28,6 @@ class CustomerLoginSuccess implements ObserverInterface
 
     /**
      * Handler for 'customer_login' event.
-     *
      * @param Observer $observer
      * @return void
      */

@@ -1,25 +1,30 @@
 <?php
+declare(strict_types=1);
 
 namespace SmartOSC\CustomerRegistration\Logger\Handler;
 
 use Magento\Framework\Filesystem\DriverInterface;
+use Magento\Framework\Logger\Handler\Base;
+use Monolog\Logger;
 
-class Customer extends \Magento\Framework\Logger\Handler\Base
+/**
+ * Log file in the var/log directory
+ */
+class Customer extends Base
 {
     /**
+     * Logging level
      * @var int
      */
-    protected $loggerType = \Monolog\Logger::INFO;
+    protected $loggerType = Logger::INFO;
 
     /**
      * @param DriverInterface $filesystem
      * @param $filePath
-     * @param $fileName
      */
     public function __construct(
         DriverInterface $filesystem,
-                        $filePath = null,
-                        $fileName = null
+                        $filePath = null
     ) {
         $fileName = '/var/log/customer-' . date('Y-m-d') . '.log';
         parent::__construct($filesystem, $filePath, $fileName);
