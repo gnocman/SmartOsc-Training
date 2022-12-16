@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace SmartOSC\CustomerRegistration\Observer;
 
 use Magento\Framework\Event\Observer;
-use SmartOSC\CustomerRegistration\Helper\Email;
+use SmartOSC\CustomerRegistration\Model\Email;
 use Magento\Framework\Event\ObserverInterface;
 
 /**
