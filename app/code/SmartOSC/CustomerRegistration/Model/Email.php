@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace SmartOSC\CustomerRegistration\Helper;
+namespace SmartOSC\CustomerRegistration\Model;
 
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;
