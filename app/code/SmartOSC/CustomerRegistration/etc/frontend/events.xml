@@ -6,6 +6,6 @@
                   instance="SmartOSC\CustomerRegistration\Observer\CustomerLoginSuccess"/>
     </event>
     <event name="customer_register_success">
-        <observer name="sendmail_toadmin" instance="SmartOSC\CustomerRegistration\Observer\SendMailToAdmin"/>
+        <observer name="email_customer_register" instance="SmartOSC\CustomerRegistration\Observer\CustomerRegisterObserver"/>
     </event>
 </config>

@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <type name="Magento\Customer\Controller\Account\CreatePost">
-        <plugin name="first_name_save_before" type="SmartOSC\CustomerRegistration\Plugin\CheckFirstname" sortOrder="1"
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Customer\Model\ResourceModel\CustomerRepository">
+        <plugin name="RemoveFirstNameWhiteSpace" type="SmartOSC\CustomerRegistration\Plugin\RemoveFirstNameWhiteSpace" sortOrder="1"
                 disabled="false"/>
     </type>
     <type name="SmartOSC\CustomerRegistration\Logger\Handler\Customer">

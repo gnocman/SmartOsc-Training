@@ -24,7 +24,7 @@ class Customer extends Base
      */
     public function __construct(
         DriverInterface $filesystem,
-                        $filePath = null
+        $filePath = null
     ) {
         $fileName = '/var/log/customer-' . date('Y-m-d') . '.log';
         parent::__construct($filesystem, $filePath, $fileName);
