@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
-        <tab id="smartosc" translate="label" sortOrder="1">
+        <tab id="smartOsc" translate="label" sortOrder="1">
             <label><![CDATA[SmartOsc]]></label>
         </tab>
         <section id="email" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
             <class>separator-top</class>
             <label>SmartOsc Email Demo</label>
-            <tab>smartosc</tab>
-            <resource>SmartOSC_CustomerRegistration::config_emaildemo</resource>
+            <tab>smartOsc</tab>
+            <resource>SmartOSC_CustomerRegistration::config_emailDemo</resource>
             <group id="demo" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Please Choose Your Email Template</label>
                 <field id="template" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
