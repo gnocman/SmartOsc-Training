@@ -3,17 +3,16 @@ declare(strict_types=1);
 
 namespace SmartOSC\CustomerRegistration\Model;
 
-use Magento\Framework\App\Helper\AbstractHelper;
-use Magento\Framework\App\Helper\Context;
+use Magento\Framework\Model\Context;
 use Magento\Framework\Escaper;
 use Magento\Framework\Mail\Template\TransportBuilder;
 use Magento\Framework\Translate\Inline\StateInterface;
 use Psr\Log\LoggerInterface;
-
+use Magento\Framework\App\Config\ScopeConfigInterface;
 /**
  * Send email when customer registration account
  */
-class Email extends AbstractHelper
+class Email
 {
     /**
      * @var StateInterface
@@ -31,6 +30,11 @@ class Email extends AbstractHelper
      * @var LoggerInterface
      */
     protected LoggerInterface $logger;
+    /**
+     * @var ScopeConfigInterface
+     */
+    private ScopeConfigInterface $scopeConfig;
+    private Context $context;
 
     /**
      * @param Context $context
@@ -42,13 +46,15 @@ class Email extends AbstractHelper
         Context          $context,
         StateInterface   $inlineTranslation,
         Escaper          $escaper,
-        TransportBuilder $transportBuilder
+        TransportBuilder $transportBuilder,
+        ScopeConfigInterface $scopeConfig
     ) {
-        parent::__construct($context);
         $this->inlineTranslation = $inlineTranslation;
         $this->escaper = $escaper;
         $this->transportBuilder = $transportBuilder;
         $this->logger = $context->getLogger();
+        $this->scopeConfig = $scopeConfig;
+        $this->context = $context;
     }
 
     /**
@@ -62,8 +68,12 @@ class Email extends AbstractHelper
                 'name' => $this->escaper->escapeHtml('Test'),
                 'email' => $this->escaper->escapeHtml('giochem22@gmail.com'),
             ];
+            $templateId = $this->scopeConfig->getValue(
+              'email/demo/template',
+              \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            );
             $transport = $this->transportBuilder
-                ->setTemplateIdentifier('email_demo_template')
+                ->setTemplateIdentifier($templateId)
                 ->setTemplateOptions(
                     [
                         'area' => \Magento\Framework\App\Area::AREA_FRONTEND,
@@ -76,7 +86,7 @@ class Email extends AbstractHelper
                         'Email: ' . $customer->getEmail(),
                 ])
                 ->setFrom($sender)
-                ->addTo($customer->getEmail())
+                ->addTo('giochem22@gmail.com')
                 ->getTransport();
             $transport->sendMessage();
             $this->inlineTranslation->resume();
