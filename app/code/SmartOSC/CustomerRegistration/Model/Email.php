@@ -9,6 +9,7 @@ use Magento\Framework\Mail\Template\TransportBuilder;
 use Magento\Framework\Translate\Inline\StateInterface;
 use Psr\Log\LoggerInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
+
 /**
  * Send email when customer registration account
  */
@@ -34,6 +35,9 @@ class Email
      * @var ScopeConfigInterface
      */
     private ScopeConfigInterface $scopeConfig;
+    /**
+     * @var Context
+     */
     private Context $context;
 
     /**
@@ -41,12 +45,13 @@ class Email
      * @param StateInterface $inlineTranslation
      * @param Escaper $escaper
      * @param TransportBuilder $transportBuilder
+     * @param ScopeConfigInterface $scopeConfig
      */
     public function __construct(
-        Context          $context,
-        StateInterface   $inlineTranslation,
-        Escaper          $escaper,
-        TransportBuilder $transportBuilder,
+        Context              $context,
+        StateInterface       $inlineTranslation,
+        Escaper              $escaper,
+        TransportBuilder     $transportBuilder,
         ScopeConfigInterface $scopeConfig
     ) {
         $this->inlineTranslation = $inlineTranslation;
@@ -58,9 +63,10 @@ class Email
     }
 
     /**
+     * @param $customer
      * @return void
      */
-    public function sendEmail($customer)
+    public function sendEmail($customer): void
     {
         try {
             $this->inlineTranslation->suspend();
@@ -69,8 +75,8 @@ class Email
                 'email' => $this->escaper->escapeHtml('giochem22@gmail.com'),
             ];
             $templateId = $this->scopeConfig->getValue(
-              'email/demo/template',
-              \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+                'email/demo/template',
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
             );
             $transport = $this->transportBuilder
                 ->setTemplateIdentifier($templateId)
