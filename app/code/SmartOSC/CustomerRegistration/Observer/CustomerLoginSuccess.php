@@ -28,6 +28,7 @@ class CustomerLoginSuccess implements ObserverInterface
 
     /**
      * Handler for 'customer_login' event.
+     *
      * @param Observer $observer
      * @return void
      */

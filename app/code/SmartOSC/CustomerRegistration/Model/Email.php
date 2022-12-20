@@ -1,12 +1,18 @@
 <?php
+/** @noinspection PhpCSValidationInspection */
 declare(strict_types=1);
 
 namespace SmartOSC\CustomerRegistration\Model;
 
+use Exception;
+use Magento\Customer\Api\Data\CustomerInterface;
+use Magento\Framework\App\Area;
 use Magento\Framework\Model\Context;
 use Magento\Framework\Escaper;
 use Magento\Framework\Mail\Template\TransportBuilder;
 use Magento\Framework\Translate\Inline\StateInterface;
+use Magento\Store\Model\ScopeInterface;
+use Magento\Store\Model\Store;
 use Psr\Log\LoggerInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 
@@ -35,10 +41,6 @@ class Email
      * @var ScopeConfigInterface
      */
     private ScopeConfigInterface $scopeConfig;
-    /**
-     * @var Context
-     */
-    private Context $context;
 
     /**
      * @param Context $context
@@ -59,14 +61,15 @@ class Email
         $this->transportBuilder = $transportBuilder;
         $this->logger = $context->getLogger();
         $this->scopeConfig = $scopeConfig;
-        $this->context = $context;
     }
 
     /**
-     * @param $customer
+     * Send email when customer registration account
+     *
+     * @param CustomerInterface $customer
      * @return void
      */
-    public function sendEmail($customer): void
+    public function sendEmail(CustomerInterface $customer): void
     {
         try {
             $this->inlineTranslation->suspend();
@@ -76,14 +79,14 @@ class Email
             ];
             $templateId = $this->scopeConfig->getValue(
                 'email/demo/template',
-                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+                ScopeInterface::SCOPE_STORE
             );
             $transport = $this->transportBuilder
                 ->setTemplateIdentifier($templateId)
                 ->setTemplateOptions(
                     [
-                        'area' => \Magento\Framework\App\Area::AREA_FRONTEND,
-                        'store' => \Magento\Store\Model\Store::DEFAULT_STORE_ID,
+                        'area' => Area::AREA_FRONTEND,
+                        'store' => Store::DEFAULT_STORE_ID,
                     ]
                 )
                 ->setTemplateVars([
@@ -96,7 +99,7 @@ class Email
                 ->getTransport();
             $transport->sendMessage();
             $this->inlineTranslation->resume();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->logger->debug($e->getMessage());
         }
     }

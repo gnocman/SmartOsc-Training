@@ -12,12 +12,13 @@ use Magento\Customer\Model\ResourceModel\CustomerRepository;
 class RemoveFirstNameWhiteSpace
 {
     /**
+     * Remove whitespace in First Name
+     *
      * @param CustomerRepository $subject
      * @param CustomerInterface $customer
-     * @param $passwordHash
      * @return array
      */
-    public function beforeSave(CustomerRepository $subject, CustomerInterface $customer, $passwordHash = null): array
+    public function beforeSave(CustomerRepository $subject, CustomerInterface $customer): array
     {
         // Only apply to the new customer
         if (!$customer->getId() && $firstName = $customer->getFirstName()) {
@@ -25,6 +26,6 @@ class RemoveFirstNameWhiteSpace
             $customer->setFirstName($firstName);
         }
 
-        return [$customer, $passwordHash];
+        return [$customer];
     }
 }
