@@ -14,19 +14,18 @@ class Customer extends Base
 {
     /**
      * Logging level
+     *
      * @var int
      */
     protected $loggerType = Logger::INFO;
 
     /**
      * @param DriverInterface $filesystem
-     * @param $filePath
      */
     public function __construct(
-        DriverInterface $filesystem,
-        $filePath = null
+        DriverInterface $filesystem
     ) {
         $fileName = '/var/log/customer-' . date('Y-m-d') . '.log';
-        parent::__construct($filesystem, $filePath, $fileName);
+        parent::__construct($filesystem, $fileName);
     }
 }

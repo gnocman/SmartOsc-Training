@@ -19,9 +19,10 @@
     },
     "version": "2.4.5-p1",
     "require": {
-        "magento/product-community-edition": "2.4.5-p1",
+        "magento/composer-dependency-version-audit-plugin": "~0.1",
         "magento/composer-root-update-plugin": "~2.0",
-        "magento/composer-dependency-version-audit-plugin": "~0.1"
+        "magento/product-community-edition": "2.4.5-p1",
+        "squizlabs/php_codesniffer": "*"
     },
     "autoload": {
         "exclude-from-classmap": [
@@ -56,8 +57,8 @@
         "phpstan/phpstan": "^1.6.8",
         "phpunit/phpunit": "~9.5.20",
         "sebastian/phpcpd": "^6.0.3",
-        "squizlabs/php_codesniffer": "~3.6.0",
-        "symfony/finder": "^5.2"
+        "symfony/finder": "^5.2",
+        "squizlabs/php_codesniffer": "3.*"
     },
     "conflict": {
         "gene/bluefoot": "*"

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace SmartOSC\CustomerRegistration\Observer;
 
+use Magento\Customer\Api\Data\CustomerInterface;
 use Magento\Framework\Event\Observer;
 use SmartOSC\CustomerRegistration\Model\Email;
 use Magento\Framework\Event\ObserverInterface;
@@ -27,12 +28,14 @@ class CustomerRegisterObserver implements ObserverInterface
     }
 
     /**
+     * Events call to sendEmail
+     *
      * @param Observer $observer
-     * @return null
      */
     public function execute(Observer $observer)
     {
+        /** @var CustomerInterface $customer */
         $customer = $observer->getEvent()->getCustomer();
-        return $this->helperEmail->sendEmail($customer);
+        $this->helperEmail->sendEmail($customer);
     }
 }
