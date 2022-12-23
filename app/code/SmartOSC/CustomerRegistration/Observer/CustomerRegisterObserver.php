@@ -35,7 +35,7 @@ class CustomerRegisterObserver implements ObserverInterface
     public function execute(Observer $observer)
     {
         /** @var CustomerInterface $customer */
-        $customer = $observer->getEvent()->getCustomer();
+        $customer = $observer->getEvent()->getData('customer');
         $this->helperEmail->sendEmail($customer);
     }
 }
