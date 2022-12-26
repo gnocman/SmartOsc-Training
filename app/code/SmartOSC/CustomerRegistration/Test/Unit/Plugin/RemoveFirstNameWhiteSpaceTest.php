@@ -14,17 +14,17 @@ class RemoveFirstNameWhiteSpaceTest extends TestCase
     /**
      * @var CustomerInterface|MockObject
      */
-    protected $customerMock;
+    protected CustomerInterface|MockObject $customerMock;
 
     /**
      * @var CustomerRepository|MockObject
      */
-    protected $repositoryMock;
+    protected MockObject|CustomerRepository $repositoryMock;
 
     /**
      * @var RemoveFirstNameWhiteSpace
      */
-    protected $plugin;
+    protected RemoveFirstNameWhiteSpace $plugin;
 
     /**
      * @return void
@@ -37,9 +37,24 @@ class RemoveFirstNameWhiteSpaceTest extends TestCase
     }
 
     /**
-     * @return void
+     * @return array
      */
-    public function testBeforeSaveNewCustomer(): void
+    public function beforeSaveProvider(): array
+    {
+        return [
+            ['John Doe', 'JohnDoe'],
+            ['Jane  Doe', 'JaneDoe'],
+            [' Jack Smith', 'JackSmith'],
+            ['Mary  Jane ', 'MaryJane'],
+        ];
+    }
+
+    /**
+     * @dataProvider beforeSaveProvider
+     * @param string $firstName
+     * @param string $expectedFirstName
+     */
+    public function testBeforeSave(string $firstName, string $expectedFirstName): void
     {
         $this->customerMock->expects($this->once())
             ->method('getId')
@@ -47,31 +62,12 @@ class RemoveFirstNameWhiteSpaceTest extends TestCase
 
         $this->customerMock->expects($this->once())
             ->method('getFirstName')
-            ->willReturn('John Doe');
+            ->willReturn($firstName);
 
         $this->customerMock->expects($this->once())
             ->method('setFirstName')
-            ->with('JohnDoe')
+            ->with($expectedFirstName)
             ->willReturnSelf();
-
-        $result = $this->plugin->beforeSave($this->repositoryMock, $this->customerMock);
-        $this->assertEquals([$this->customerMock], $result);
-    }
-
-    /**
-     * @return void
-     */
-    public function testBeforeSaveExistingCustomer(): void
-    {
-        $this->customerMock->expects($this->once())
-            ->method('getId')
-            ->willReturn(123);
-
-        $this->customerMock->expects($this->never())
-            ->method('getFirstName');
-
-        $this->customerMock->expects($this->never())
-            ->method('setFirstName');
 
         $result = $this->plugin->beforeSave($this->repositoryMock, $this->customerMock);
         $this->assertEquals([$this->customerMock], $result);
