@@ -56,20 +56,23 @@ class RemoveFirstNameWhiteSpaceTest extends TestCase
      */
     public function testBeforeSave(string $firstName, string $expectedFirstName): void
     {
-        $this->customerMock->expects($this->once())
+        $this->customerMock->expects($this->any())
             ->method('getId')
             ->willReturn(null);
 
-        $this->customerMock->expects($this->once())
+        $this->customerMock->expects($this->any())
             ->method('getFirstName')
             ->willReturn($firstName);
 
-        $this->customerMock->expects($this->once())
+        $this->assertEquals($firstName, $this->customerMock->getFirstName());
+
+        $this->customerMock->expects($this->any())
             ->method('setFirstName')
             ->with($expectedFirstName)
-            ->willReturnSelf();
+            ->willReturn($expectedFirstName);
 
-        $result = $this->plugin->beforeSave($this->repositoryMock, $this->customerMock);
-        $this->assertEquals([$this->customerMock], $result);
+        $this->plugin->beforeSave($this->repositoryMock, $this->customerMock);
+
+        $this->assertEquals($expectedFirstName, $this->customerMock->setFirstName($expectedFirstName));
     }
 }
