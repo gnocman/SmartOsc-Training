@@ -8,7 +8,6 @@ use Magento\Customer\Model\ResourceModel\CustomerRepository;
 use PHPUnit\Framework\MockObject\MockObject;
 use SmartOSC\CustomerRegistration\Plugin\RemoveFirstNameWhiteSpace;
 use PHPUnit\Framework\TestCase;
-
 class RemoveFirstNameWhiteSpaceTest extends TestCase
 {
     /**
@@ -64,15 +63,12 @@ class RemoveFirstNameWhiteSpaceTest extends TestCase
             ->method('getFirstName')
             ->willReturn($firstName);
 
-        $this->assertEquals($firstName, $this->customerMock->getFirstName());
-
         $this->customerMock->expects($this->any())
             ->method('setFirstName')
             ->with($expectedFirstName)
-            ->willReturn($expectedFirstName);
+            ->willReturnSelf();
 
-        $this->plugin->beforeSave($this->repositoryMock, $this->customerMock);
-
-        $this->assertEquals($expectedFirstName, $this->customerMock->setFirstName($expectedFirstName));
+        $result = $this->plugin->beforeSave($this->repositoryMock, $this->customerMock);
+        $this->assertEquals($expectedFirstName, $result[0]->getFirstName());
     }
 }
