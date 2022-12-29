@@ -69,6 +69,6 @@ class RemoveFirstNameWhiteSpaceTest extends TestCase
             ->willReturnSelf();
 
         $result = $this->plugin->beforeSave($this->repositoryMock, $this->customerMock);
-        $this->assertEquals($expectedFirstName, $result[0]->getFirstName());
+        $this->assertEquals([$this->customerMock], $result);
     }
 }
