@@ -19,5 +19,6 @@ class SaveToOrder implements \Magento\Framework\Event\ObserverInterface
         $quote = $event->getQuote();
         $order = $event->getOrder();
         $order->setData('select_custom_field_hobbies', $quote->getData('select_custom_field_hobbies'));
+        $order->setData('select_custom_field_income', $quote->getData('select_custom_field_income'));
     }
 }
