@@ -1,4 +1,9 @@
 <?php
+/**
+ * Copyright © Nam Cong, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+declare(strict_types = 1);
 
 namespace SmartOSC\Checkout\Controller\Quote;
 
@@ -45,9 +50,10 @@ class Save extends \Magento\Framework\App\Action\Action
         if ($post) {
             $cartId = $post['cartId'];
             $hobbies = $post['select_custom_field_hobbies'];
-            $login = $post['is_customer'];
+            $income = $post['select_custom_field_income'];
+            $loggin = $post['is_customer'];
 
-            if ($login === 'false') {
+            if ($loggin === 'false') {
                 $cartId = $this->quoteIdMaskFactory->create()->load($cartId, 'masked_id')->getQuoteId();
             }
 
@@ -57,6 +63,7 @@ class Save extends \Magento\Framework\App\Action\Action
             }
 
             $quote->setData('select_custom_field_hobbies', $hobbies);
+            $quote->setData('select_custom_field_income', $income);
             $this->quoteRepository->save($quote);
         }
     }

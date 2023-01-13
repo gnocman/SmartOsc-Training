@@ -1,3 +1,7 @@
+/**
+ * Copyright © Nam Cong, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
 define([
     'jquery',
     'mage/utils/wrapper',
@@ -31,16 +35,18 @@ define([
             var url = urlFormatter.build('checkout/quote/save');
 
             var hobbies = $('[name="select_custom_field_hobbies"]').val();
+            var income = $('[name="select_custom_field_income"]').val();
 
-            if (hobbies) {
+            if (hobbies || income) { //modified line
 
                 var payload = {
                     'cartId': quoteId,
                     'select_custom_field_hobbies': hobbies,
+                    'select_custom_field_income': income,
                     'is_customer': isCustomer
                 };
 
-                if (!payload.select_custom_field_hobbies) {
+                if (!payload.select_custom_field_hobbies && !payload.select_custom_field_income) {
                     return true;
                 }
 

@@ -1,5 +1,10 @@
 <?php
 /**
+ * Copyright © Nam Cong, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
  * @var $block \SmartOSC\OrderManagement\Block\Adminhtml\Order\View\Tab\CustomTab
  */
 ?>
@@ -21,6 +26,11 @@
             <th><?php /* @escapeNotVerified */
                 echo __('Customer Hobbies :') ?></th>
             <td><?= $block->getOrderSelectCustomFieldHobbies(); ?></td>
+        </tr>
+        <tr>
+            <th><?php /* @escapeNotVerified */
+                echo __('Customer Hobbies :') ?></th>
+            <td><?= $block->getOrderSelectCustomFieldIncome(); ?></td>
         </tr>
         </tbody>
     </table>
