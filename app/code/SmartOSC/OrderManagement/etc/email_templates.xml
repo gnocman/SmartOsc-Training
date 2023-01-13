@@ -1,6 +1,0 @@
-<?xml version="1.0"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
-    <template id="custom_email_template" label="This is email demo" file="custom_email_template.html" type="html"
-              module="SmartOSC_OrderManagement" area="frontend"/>
-</config>

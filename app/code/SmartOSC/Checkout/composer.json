@@ -1,10 +1,10 @@
 {
-  "name": "smartosc/module-checkout-flow",
+  "name": "smartosc/module-checkout",
   "version": "1.0.0",
   "description": "N/A",
   "type": "magento2-module",
   "require": {
-    "magento/framework": "*"
+    "../../../../vendor/magento/framework": "*"
   },
   "license": [
     "Proprietary"
@@ -14,7 +14,7 @@
       "registration.php"
     ],
     "psr-4": {
-      "SmartOSC\\CheckoutFlow\\": ""
+      "SmartOSC\\Checkout\\": ""
     }
   }
 }
