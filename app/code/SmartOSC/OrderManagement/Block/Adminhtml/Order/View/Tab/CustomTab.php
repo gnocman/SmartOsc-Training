@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace SmartOSC\OrderManagement\Block\Adminhtml\Order\View\Tab;
 
 /**
- * Custom tab
+ * Custom tab html
  */
 class CustomTab extends \Magento\Backend\Block\Template implements \Magento\Backend\Block\Widget\Tab\TabInterface
 {
@@ -43,18 +43,6 @@ class CustomTab extends \Magento\Backend\Block\Template implements \Magento\Back
     }
 
     /**
-     * Retrieve order model instance
-     *
-     * @return int
-     *
-     * Get current id order
-     */
-    public function getOrderId()
-    {
-        return $this->getOrder()->getEntityId();
-    }
-
-    /**
      * Retrieve order increment id
      *
      * @return string
@@ -65,13 +53,13 @@ class CustomTab extends \Magento\Backend\Block\Template implements \Magento\Back
     }
 
     /**
-     * Retrieve order increment id
+     * Retrieve order Select Custom Field Hobbies
      *
      * @return string
      */
-    public function getCustomerEmail()
+    public function getOrderSelectCustomFieldHobbies()
     {
-        return $this->getOrder()->getCustomerEmail();
+        return $this->getOrder()->getSelectCustomFieldHobbies();
     }
 
     /**
