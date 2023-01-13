@@ -1,4 +1,8 @@
 <?php
+/**
+ * Copyright © Nam Cong, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
 declare(strict_types=1);
 
 namespace SmartOSC\OrderManagement\Plugin\Adminhtml;
@@ -11,14 +15,14 @@ class AddCustomButton
     /**
      * Custom Button
      *
-     * @param \Magento\Backend\Block\Widget\Button\Toolbar\Interceptor $subject
+     * @param \Magento\Backend\Block\Widget\Button\Toolbar $subject
      * @param \Magento\Framework\View\Element\AbstractBlock $context
      * @param \Magento\Backend\Block\Widget\Button\ButtonList $buttonList
      */
     public function beforePushButtons(
-        \Magento\Backend\Block\Widget\Button\Toolbar\Interceptor $subject,
-        \Magento\Framework\View\Element\AbstractBlock            $context,
-        \Magento\Backend\Block\Widget\Button\ButtonList          $buttonList
+        \Magento\Backend\Block\Widget\Button\Toolbar    $subject,
+        \Magento\Framework\View\Element\AbstractBlock   $context,
+        \Magento\Backend\Block\Widget\Button\ButtonList $buttonList
     ) {
         if ($context->getRequest()->getFullActionName() == 'sales_order_view') {
             $order_id = $context->getRequest()->getParam('order_id');

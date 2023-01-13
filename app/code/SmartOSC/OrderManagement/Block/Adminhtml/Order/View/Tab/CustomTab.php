@@ -1,4 +1,8 @@
 <?php
+/**
+ * Copyright © Nam Cong, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
 declare(strict_types=1);
 
 namespace SmartOSC\OrderManagement\Block\Adminhtml\Order\View\Tab;
@@ -55,11 +59,21 @@ class CustomTab extends \Magento\Backend\Block\Template implements \Magento\Back
     /**
      * Retrieve order Select Custom Field Hobbies
      *
-     * @return string
+     * @return mixed
      */
     public function getOrderSelectCustomFieldHobbies()
     {
         return $this->getOrder()->getSelectCustomFieldHobbies();
+    }
+
+    /**
+     * Retrieve order Select Custom Field Income
+     *
+     * @return mixed
+     */
+    public function getOrderSelectCustomFieldIncome()
+    {
+        return $this->getOrder()->getSelectCustomFieldIncome();
     }
 
     /**

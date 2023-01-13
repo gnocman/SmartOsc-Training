@@ -1,3 +1,7 @@
+/**
+ * Copyright © Nam Cong, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
 define([
     'jquery',
     'mage/utils/wrapper',
