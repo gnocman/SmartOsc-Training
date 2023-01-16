@@ -29,17 +29,17 @@ define([
         /** Override default place order action and add agreement_ids to request */
         return wrapper.wrap(placeOrderAction, function (originalAction, paymentData, messageContainer) {
             agreementsAssigner(paymentData);
-            var isCustomer = customer.isLoggedIn();
-            var quoteId = quote.getQuoteId();
+            let isCustomer = customer.isLoggedIn();
+            let quoteId = quote.getQuoteId();
 
-            var url = urlFormatter.build('checkout/quote/save');
+            let url = urlFormatter.build('checkout/quote/save');
 
-            var hobbies = $('[name="select_custom_field_hobbies"]').val();
-            var income = $('[name="select_custom_field_income"]').val();
+            let hobbies = $('[name="select_custom_field_hobbies"]').val();
+            let income = $('[name="select_custom_field_income"]').val();
 
             if (hobbies || income) { //modified line
 
-                var payload = {
+                let payload = {
                     'cartId': quoteId,
                     'select_custom_field_hobbies': hobbies,
                     'select_custom_field_income': income,
@@ -50,7 +50,7 @@ define([
                     return true;
                 }
 
-                var result = true;
+                let result = true;
 
                 $.ajax({
                     url: url,

@@ -3,33 +3,41 @@
  * Copyright © Nam Cong, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 declare(strict_types=1);
 
 namespace SmartOSC\OrderManagement\Block\Adminhtml\Order\View\Tab;
 
+use Magento\Backend\Block\Template;
+use Magento\Backend\Block\Template\Context;
+use Magento\Backend\Block\Widget\Tab\TabInterface;
+use Magento\Framework\Registry;
+use Magento\Sales\Model\Order;
+
 /**
  * Custom tab html
  */
-class CustomTab extends \Magento\Backend\Block\Template implements \Magento\Backend\Block\Widget\Tab\TabInterface
+class CustomTab extends Template implements TabInterface
 {
     /**
      * @var string
      */
     protected $_template = 'SmartOSC_OrderManagement::order/view/tab/customTab.phtml';
     /**
-     * @var \Magento\Framework\Registry
+     * @var Registry
      */
-    private $_coreRegistry;
+    private Registry $_coreRegistry;
 
     /**
      * View constructor.
-     * @param \Magento\Backend\Block\Template\Context $context
-     * @param \Magento\Framework\Registry $registry
+     *
+     * @param Context $context
+     * @param Registry $registry
      * @param array $data
      */
     public function __construct(
-        \Magento\Backend\Block\Template\Context $context,
-        \Magento\Framework\Registry             $registry,
+        Context $context,
+        Registry             $registry,
         array                                   $data = []
     ) {
         $this->_coreRegistry = $registry;
@@ -39,9 +47,9 @@ class CustomTab extends \Magento\Backend\Block\Template implements \Magento\Back
     /**
      * Retrieve order model instance
      *
-     * @return \Magento\Sales\Model\Order
+     * @return Order
      */
-    public function getOrder()
+    public function getOrder(): Order
     {
         return $this->_coreRegistry->registry('current_order');
     }
@@ -51,7 +59,7 @@ class CustomTab extends \Magento\Backend\Block\Template implements \Magento\Back
      *
      * @return string
      */
-    public function getOrderIncrementId()
+    public function getOrderIncrementId(): string
     {
         return $this->getOrder()->getIncrementId();
     }
@@ -61,7 +69,7 @@ class CustomTab extends \Magento\Backend\Block\Template implements \Magento\Back
      *
      * @return mixed
      */
-    public function getOrderSelectCustomFieldHobbies()
+    public function getOrderSelectCustomFieldHobbies(): mixed
     {
         return $this->getOrder()->getSelectCustomFieldHobbies();
     }
@@ -71,7 +79,7 @@ class CustomTab extends \Magento\Backend\Block\Template implements \Magento\Back
      *
      * @return mixed
      */
-    public function getOrderSelectCustomFieldIncome()
+    public function getOrderSelectCustomFieldIncome(): mixed
     {
         return $this->getOrder()->getSelectCustomFieldIncome();
     }
@@ -79,7 +87,7 @@ class CustomTab extends \Magento\Backend\Block\Template implements \Magento\Back
     /**
      * @inheritdoc
      */
-    public function getTabLabel()
+    public function getTabLabel(): \Magento\Framework\Phrase|string
     {
         return __('Customer Survey');
     }
@@ -87,7 +95,7 @@ class CustomTab extends \Magento\Backend\Block\Template implements \Magento\Back
     /**
      * @inheritdoc
      */
-    public function getTabTitle()
+    public function getTabTitle(): \Magento\Framework\Phrase|string
     {
         return __('Customer Survey');
     }
@@ -95,7 +103,7 @@ class CustomTab extends \Magento\Backend\Block\Template implements \Magento\Back
     /**
      * @inheritdoc
      */
-    public function canShowTab()
+    public function canShowTab(): bool
     {
         return true;
     }
@@ -103,7 +111,7 @@ class CustomTab extends \Magento\Backend\Block\Template implements \Magento\Back
     /**
      * @inheritdoc
      */
-    public function isHidden()
+    public function isHidden(): bool
     {
         return false;
     }
