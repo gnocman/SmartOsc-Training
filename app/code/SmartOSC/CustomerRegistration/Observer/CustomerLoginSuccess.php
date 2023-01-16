@@ -10,39 +10,45 @@ namespace SmartOSC\CustomerRegistration\Observer;
 
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
-use SmartOSC\CustomerRegistration\Logger\Customer;
+use Psr\Log\LoggerInterface;
 
 /**
- * Log customer data (current date and time, customer first name, customer lastname, customer email)
+ * Event log info customer when register
  */
 class CustomerLoginSuccess implements ObserverInterface
 {
     /**
-     * @var Customer
+     * @var LoggerInterface
      */
-    protected Customer $loggerCustomer;
+    private LoggerInterface $logger;
 
     /**
-     * @param Customer $loggerCustomer
+     * LogCustomerData constructor.
+     *
+     * @param LoggerInterface $logger
      */
-    public function __construct(
-        Customer $loggerCustomer
-    ) {
-        $this->loggerCustomer = $loggerCustomer;
+    public function __construct(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
     }
 
     /**
-     * Handler for 'customer_login' event.
+     * Event log info customer when register
      *
      * @param Observer $observer
      * @return void
      */
     public function execute(Observer $observer): void
     {
-        /** @var \Magento\Customer\Model\Customer $customer */
         $customer = $observer->getEvent()->getCustomer();
-        $this->loggerCustomer->info('First Name: ' . $customer->getFirstname());
-        $this->loggerCustomer->info('Last Name: ' . $customer->getLastname());
-        $this->loggerCustomer->info('Email: ' . $customer->getEmail());
+
+        $data = [
+            'current_date_time' => date('Y-m-d H:i:s'),
+            'first_name' => $customer->getFirstname(),
+            'last_name' => $customer->getLastname(),
+            'email' => $customer->getEmail(),
+        ];
+
+        $this->logger->info(json_encode($data));
     }
 }

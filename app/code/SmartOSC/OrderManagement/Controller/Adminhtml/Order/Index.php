@@ -8,10 +8,6 @@ declare(strict_types=1);
 
 namespace SmartOSC\OrderManagement\Controller\Adminhtml\Order;
 
-use Magento\Framework\App\ResponseInterface;
-use Magento\Framework\Controller\Result\Redirect;
-use Magento\Framework\Controller\ResultInterface;
-use Magento\Framework\Exception\LocalizedException;
 use Magento\Sales\Controller\Adminhtml\Order;
 
 /**
@@ -22,16 +18,16 @@ class Index extends Order
     /**
      * Execute action
      *
-     * @return ResponseInterface|Redirect|ResultInterface
+     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\Result\Redirect|\Magento\Framework\Controller\ResultInterface
      */
-    public function execute(): ResultInterface|ResponseInterface|Redirect
+    public function execute()
     {
         $order = $this->_initOrder();
         if ($order) {
             try {
                 $this->orderManagement->notify($order->getEntityId());
                 $this->messageManager->addSuccessMessage(__('You sent the order email.'));
-            } catch (LocalizedException $e) {
+            } catch (\Magento\Framework\Exception\LocalizedException $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
             } catch (\Exception $e) {
                 $this->messageManager->addErrorMessage(__('We can\'t send the email order right now.'));
