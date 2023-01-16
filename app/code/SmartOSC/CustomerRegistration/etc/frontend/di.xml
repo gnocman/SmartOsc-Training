@@ -7,20 +7,11 @@
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <type name="Magento\Customer\Model\ResourceModel\CustomerRepository">
-        <plugin name="RemoveFirstNameWhiteSpace" type="SmartOSC\CustomerRegistration\Plugin\RemoveFirstNameWhiteSpace" sortOrder="1"
-                disabled="false"/>
+        <plugin name="RemoveFirstNameWhiteSpace" type="SmartOSC\CustomerRegistration\Plugin\RemoveFirstNameWhiteSpace" sortOrder="1" disabled="false"/>
     </type>
-    <type name="SmartOSC\CustomerRegistration\Logger\Handler\Customer">
+    <type name="SmartOSC\CustomerRegistration\Observer\CustomerLoginSuccess">
         <arguments>
-            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
-        </arguments>
-    </type>
-    <type name="SmartOSC\CustomerRegistration\Logger\Customer">
-        <arguments>
-            <argument name="name" xsi:type="string">customer_logger</argument>
-            <argument name="handlers" xsi:type="array">
-                <item name="system" xsi:type="object">SmartOSC\CustomerRegistration\Logger\Handler\Customer</item>
-            </argument>
+            <argument name="logger" xsi:type="object">SmartOSC\CustomerRegistration\Model\Logger\VirtualLogger</argument>
         </arguments>
     </type>
 </config>

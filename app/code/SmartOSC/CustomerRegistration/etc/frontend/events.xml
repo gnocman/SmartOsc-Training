@@ -5,13 +5,9 @@
  * See COPYING.txt for license details.
  */
  -->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
-    <event name="customer_login">
-        <observer name="custom_log_customer_login"
-                  instance="SmartOSC\CustomerRegistration\Observer\CustomerLoginSuccess"/>
-    </event>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
     <event name="customer_register_success">
+        <observer name="custom_log_customer_login" instance="SmartOSC\CustomerRegistration\Observer\CustomerLoginSuccess"/>
         <observer name="email_customer_register" instance="SmartOSC\CustomerRegistration\Observer\CustomerRegisterObserver"/>
     </event>
 </config>
