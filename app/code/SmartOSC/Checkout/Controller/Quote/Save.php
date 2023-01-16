@@ -3,11 +3,15 @@
  * Copyright © Nam Cong, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace SmartOSC\Checkout\Controller\Quote;
 
+use Magento\Framework\App\Action\Context;
 use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Quote\Api\CartRepositoryInterface;
+use Magento\Quote\Model\QuoteIdMaskFactory;
 
 /**
  * Save data custom to database
@@ -15,23 +19,23 @@ use Magento\Framework\Exception\NoSuchEntityException;
 class Save extends \Magento\Framework\App\Action\Action
 {
     /**
-     * @var \Magento\Quote\Model\QuoteIdMaskFactory
+     * @var QuoteIdMaskFactory
      */
-    protected $quoteIdMaskFactory;
+    protected QuoteIdMaskFactory $quoteIdMaskFactory;
     /**
-     * @var \Magento\Quote\Api\CartRepositoryInterface
+     * @var CartRepositoryInterface
      */
-    protected $quoteRepository;
+    protected CartRepositoryInterface $quoteRepository;
 
     /**
-     * @param \Magento\Framework\App\Action\Context $context
-     * @param \Magento\Quote\Model\QuoteIdMaskFactory $quoteIdMaskFactory
-     * @param \Magento\Quote\Api\CartRepositoryInterface $quoteRepository
+     * @param Context $context
+     * @param QuoteIdMaskFactory $quoteIdMaskFactory
+     * @param CartRepositoryInterface $quoteRepository
      */
     public function __construct(
-        \Magento\Framework\App\Action\Context      $context,
-        \Magento\Quote\Model\QuoteIdMaskFactory    $quoteIdMaskFactory,
-        \Magento\Quote\Api\CartRepositoryInterface $quoteRepository
+        Context                 $context,
+        QuoteIdMaskFactory      $quoteIdMaskFactory,
+        CartRepositoryInterface $quoteRepository
     ) {
         parent::__construct($context);
         $this->quoteRepository = $quoteRepository;
@@ -46,14 +50,14 @@ class Save extends \Magento\Framework\App\Action\Action
      */
     public function execute()
     {
-        $post = $this->getRequest()->getPostValue();
+        $post = $this->getRequest()->getParams();
         if ($post) {
             $cartId = $post['cartId'];
             $hobbies = $post['select_custom_field_hobbies'];
             $income = $post['select_custom_field_income'];
-            $loggin = $post['is_customer'];
+            $login = $post['is_customer'];
 
-            if ($loggin === 'false') {
+            if ($login === 'false') {
                 $cartId = $this->quoteIdMaskFactory->create()->load($cartId, 'masked_id')->getQuoteId();
             }
 

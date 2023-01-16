@@ -3,6 +3,7 @@
  * Copyright © Nam Cong, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 declare(strict_types=1);
 
 namespace SmartOSC\Checkout\Plugin\Checkout;
@@ -19,10 +20,8 @@ class LayoutProcessor
      * @param array $jsLayout
      * @return array
      */
-    public function afterProcess(
-        \Magento\Checkout\Block\Checkout\LayoutProcessor $subject,
-        array                                            $jsLayout
-    ) {
+    public function afterProcess(\Magento\Checkout\Block\Checkout\LayoutProcessor $subject, array $jsLayout): array
+    {
         $validation['required-entry'] = true;
 
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']

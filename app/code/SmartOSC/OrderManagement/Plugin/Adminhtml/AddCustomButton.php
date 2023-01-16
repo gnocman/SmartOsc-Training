@@ -7,6 +7,10 @@ declare(strict_types=1);
 
 namespace SmartOSC\OrderManagement\Plugin\Adminhtml;
 
+use Magento\Backend\Block\Widget\Button\ButtonList;
+use Magento\Backend\Block\Widget\Button\Toolbar;
+use Magento\Framework\View\Element\AbstractBlock;
+
 /**
  * Custom Button
  */
@@ -15,15 +19,12 @@ class AddCustomButton
     /**
      * Custom Button
      *
-     * @param \Magento\Backend\Block\Widget\Button\Toolbar $subject
-     * @param \Magento\Framework\View\Element\AbstractBlock $context
-     * @param \Magento\Backend\Block\Widget\Button\ButtonList $buttonList
+     * @param Toolbar $subject
+     * @param AbstractBlock $context
+     * @param ButtonList $buttonList
      */
-    public function beforePushButtons(
-        \Magento\Backend\Block\Widget\Button\Toolbar    $subject,
-        \Magento\Framework\View\Element\AbstractBlock   $context,
-        \Magento\Backend\Block\Widget\Button\ButtonList $buttonList
-    ) {
+    public function beforePushButtons(Toolbar $subject, AbstractBlock $context, ButtonList $buttonList): void
+    {
         if ($context->getRequest()->getFullActionName() == 'sales_order_view') {
             $order_id = $context->getRequest()->getParam('order_id');
             $url = $context->getUrl('osc_order/order/index', ['order_id' => $order_id]);

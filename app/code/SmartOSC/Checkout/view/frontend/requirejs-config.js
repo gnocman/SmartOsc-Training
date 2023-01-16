@@ -2,7 +2,7 @@
  * Copyright © Nam Cong, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-var config = {
+let config = {
     config: {
         mixins: {
             'Magento_Checkout/js/action/place-order': {
@@ -10,4 +10,4 @@ var config = {
             },
         }
     }
-}
+};
