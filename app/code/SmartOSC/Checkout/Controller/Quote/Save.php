@@ -8,15 +8,17 @@ declare(strict_types=1);
 
 namespace SmartOSC\Checkout\Controller\Quote;
 
+use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Model\QuoteIdMaskFactory;
+use Magento\Framework\App\Action\HttpPostActionInterface;
 
 /**
  * Save data custom to database
  */
-class Save extends \Magento\Framework\App\Action\Action
+class Save extends Action implements HttpPostActionInterface
 {
     /**
      * @var QuoteIdMaskFactory
