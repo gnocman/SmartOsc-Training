@@ -36,9 +36,9 @@ class CustomTab extends Template implements TabInterface
      * @param array $data
      */
     public function __construct(
-        Context $context,
-        Registry             $registry,
-        array                                   $data = []
+        Context  $context,
+        Registry $registry,
+        array    $data = []
     ) {
         $this->_coreRegistry = $registry;
         parent::__construct($context, $data);
